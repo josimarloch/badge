@@ -4,7 +4,7 @@
     <class>br.net.loch.badge.beans.Carteirinha</class>
     <class>br.net.loch.badge.beans.Usuario</class>
     <properties>
-      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>

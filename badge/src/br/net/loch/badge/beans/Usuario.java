@@ -60,7 +60,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "br.net.loch.badge.beans.Usuario[ id=" + id + " ]";
+        return "br.net.loch.badge.beans.Usuario[ id=" + id + ", login = "+getEmail()+" ]";
     }
 
     public String getEmail() {
