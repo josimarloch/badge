@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="badgePU" transaction-type="RESOURCE_LOCAL">
+    <class>br.net.loch.badge.beans.Carteirinha</class>
+    <properties>
+      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:badge.db"/>
+      <property name="hibernate.dialect" value="br.net.loch.badge.dao.SQLiteDialect"/>
+      <property name="javax.persistence.schema-generation.database.action" value="none"/>
+      <!--     
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+            <property name="zjavax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/scp?zeroDateTimeBehavior=convertToNull"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="grupoaion"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            -->
+    </properties>
+  </persistence-unit>
+</persistence>
