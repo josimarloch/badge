@@ -1,6 +1,8 @@
 language: java
 jdk:
  - oraclejdk8
-script: mvn clean verify
+script:
+- bundle exec rake build
+- bundle exec rake builddoc
 notifications:
   slack: utfpres:MqIvNVFKDoRUvlItjHxz8kxd
