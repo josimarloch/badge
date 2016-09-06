@@ -33,6 +33,22 @@ public class Carteirinha implements Serializable {
     @ManyToOne
     private Usuario usuarioCadastro;
 
+    public Calendar getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Calendar dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Usuario getUsuarioCadastro() {
+        return usuarioCadastro;
+    }
+
+    public void setUsuarioCadastro(Usuario usuarioCadastro) {
+        this.usuarioCadastro = usuarioCadastro;
+    }
+
     public Carteirinha() {
         this.dataCadastro = Calendar.getInstance();
     }

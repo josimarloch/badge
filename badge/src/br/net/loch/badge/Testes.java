@@ -6,7 +6,9 @@
 
 package br.net.loch.badge;
 
+import br.net.loch.badge.beans.Carteirinha;
 import br.net.loch.badge.beans.Usuario;
+import br.net.loch.badge.dao.CarteirinhaDaoSQLite;
 import br.net.loch.badge.dao.DaoSqliteGenerico;
 
 /**
@@ -21,5 +23,14 @@ public class Testes {
         DaoSqliteGenerico daoU = new DaoSqliteGenerico(Usuario.class);
         daoU.save(usuario);
         System.out.println("Usuario "+daoU.listAll());
+        
+        CarteirinhaDaoSQLite cd = new CarteirinhaDaoSQLite();
+        Carteirinha c = new Carteirinha();
+        c.setNome("josimar");
+        c.setIdade(21);
+        c.setUsuarioCadastro(usuario);
+        cd.save(c);
+        
+        System.out.println("carteirinhas: "+cd.findByNome("josimar"));
     }
 }
