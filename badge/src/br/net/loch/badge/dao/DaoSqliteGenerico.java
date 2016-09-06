@@ -19,7 +19,7 @@ import javax.persistence.Query;
 public class DaoSqliteGenerico<T> {
 
     static EntityManagerFactory emf;
-    EntityManager em;
+    protected EntityManager em;
     protected Class clazz;
 
 
