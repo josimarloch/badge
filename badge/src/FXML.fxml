@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.FXMLController">
+  <children>
+    <Label layoutX="61.0" layoutY="52.0" text="Nome" />
+    <TextField layoutX="108.0" layoutY="52.0" prefWidth="200.0" />
+    <Label layoutX="61.0" layoutY="86.0" text="Idade" />
+    <TextField layoutX="108.0" layoutY="83.0" prefWidth="200.0" />
+    <Button layoutX="61.0" layoutY="349.0" mnemonicParsing="false" text="Salvar" />
+    <Button cancelButton="true" layoutX="149.0" layoutY="349.0" mnemonicParsing="false" text="Cancelar" />
+    <Label layoutX="66.0" layoutY="105.0" prefHeight="29.0" text="Foto" />
+    <Button fx:id="bt_cf" layoutX="108.0" layoutY="110.0" mnemonicParsing="false" text="Carregar Foto..." />
+  </children>
+  <stylesheets>
+    <URL value="@fxml.css" />
+  </stylesheets>
+</AnchorPane>

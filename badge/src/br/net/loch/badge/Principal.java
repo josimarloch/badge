@@ -8,6 +8,7 @@ package br.net.loch.badge;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
@@ -47,10 +48,11 @@ public class Principal extends Application {
     // File menu - new, save, exit
     Menu carteirinhaMenu = new Menu("Carteirinha");
     MenuItem newMenuItem = new MenuItem("Nova");
+    newMenuItem.setOnAction(ActionEvent -> new CadastroCarteirinha().start(primaryStage));
     //newMenuItem.se
     MenuItem saveMenuItem = new MenuItem("Pesquisar");
     MenuItem exitMenuItem = new MenuItem("Exit");
-    exitMenuItem.setOnAction(actionEvent -> Platform.exit());
+   // exitMenuItem.setOnAction(actionEvent -> Platform.exit());
 
     carteirinhaMenu.getItems().addAll(newMenuItem, saveMenuItem,
         new SeparatorMenuItem(), exitMenuItem);
