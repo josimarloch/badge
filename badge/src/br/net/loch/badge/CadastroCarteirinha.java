@@ -6,7 +6,7 @@
 package br.net.loch.badge;
 
 import br.net.loch.badge.beans.Carteirinha;
-import br.net.loch.badge.dao.CarteirinhaDaoSQLite;
+import br.net.loch.badge.dao.DaoCarteirinha;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -26,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import util.ImageResizerService;
 
 /**
@@ -36,67 +37,119 @@ public class CadastroCarteirinha extends Application {
 
     private Stage stage;
     byte[] byteFoto;
-
+    Label lbNome;
+    TextField txNome;
+    Label lbIdade;
+    TextField txIdade;
+    Label lbFoto;
+    Button btFoto;
+    Button btSalvar;
+    Button btSair;
+    Image img;
+    ImageView imgView;
+    Label lbInfo;
+      AnchorPane pane;
+  Scene scene;
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
+        initComponents();
+        btFoto.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event
+                    ) {
+                        File foto = carregaFoto();
+                        if (foto != null) {
+                            String path = foto.getAbsolutePath().replaceAll("\\\\", "/");
+                            File temp2 = null;
+                            try {
+                                File temp = new File("src/br/net/loch/badge/img/temp.jpg");
+                                temp2 = new File("src/temp2.jpg");
+                                //  copyFile(foto, temp);
+                                ImageResizerService irs = new ImageResizerService(foto);
+                                byteFoto = irs.getNormal(200);
+                                irs.converterArayByteEmArquivo(temp2, byteFoto);
+                            System.out.println(path);
+                            Image novafoto = new Image("file:"+temp2.getCanonicalPath());
+                            imgView.setImage(novafoto);
+                            } catch (IOException ex) {
+                                Logger.getLogger(CadastroCarteirinha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
 
-        /*
-         StackPane root = new StackPane();
+                        } else {
+                            
+                        }
 
-         Scene scene = new Scene(root, 600, 400);
-         TextField txtNome = new TextField();
-         Label lbNome= new Label("Nome");
-         TextField txtSaudacao = new TextField();
-         Label lblNome = new Label();
-         //lblNome.textProperty().bind(txtNome.textProperty().concat(", ")
-         //       .concat(txtSaudacao.textProperty()
-         //       ));
-         root.getChildren().add(lbNome);
-         root.getChildren().add(lblNome);
-         //root.getChildren().add(btn);
+                    }
+                }
+        );
+        btSalvar.setOnAction(
+                new EventHandler<ActionEvent>() {
 
-         stage.setTitle("Cadastrar Carteirinha");
-         stage.setScene(scene);
-         stage.show();*/
-        AnchorPane pane = new AnchorPane();
+                    @Override
+                    public void handle(ActionEvent event
+                    ) {
+                        salvar(txNome.getText(), txIdade.getText(), byteFoto, lbInfo);
+                    }
+                }
+        );
+        btSair.setOnAction(
+                new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent event
+                    ) {
+                       stage.close();
+                     //  primaryStage.show();
+                    }
+                }
+        );
+       
+
+    }
+
+    public void initComponents() {
+            pane = new AnchorPane();
         pane.setPrefSize(600, 400);
-        Label lbNome = new Label("Nome");
+
+        lbNome = new Label("Nome");
+        txNome = new TextField();
+        lbIdade = new Label("Idade");
+        txIdade = new TextField();
+        lbFoto = new Label("Foto");
+        btFoto = new Button("Carregar Foto...");
+        btSalvar = new Button("Salvar");
+        btSair = new Button("Sair");
+        img = new Image("/br/net/loch/badge/img/semfoto.jpg");
+        imgView = new ImageView(img);
+        lbInfo = new Label("");
+        lbNome = new Label("Nome");
         lbNome.setLayoutX(50);
         lbNome.setLayoutY(10);
-        TextField txNome = new TextField();
+        txNome = new TextField();
         txNome.setLayoutX(100);
         txNome.setLayoutY(10);
-        Label lbIdade = new Label("Idade");
         lbIdade.setLayoutX(50);
         lbIdade.setLayoutY(50);
-
-        TextField txIdade = new TextField();
         txIdade.setMaxHeight(2);
         txIdade.setLayoutX(100);
         txIdade.setLayoutY(50);
-        Label lbFoto = new Label("Foto");
         lbFoto.setLayoutX(50);
         lbFoto.setLayoutY(90);
-        Button btFoto = new Button("Carregar Foto...");
-
         btFoto.setLayoutX(100);
         btFoto.setLayoutY(90);
-
-        Button btSalvar = new Button("Salvar");
         btSalvar.setLayoutX(100);
-        btSalvar.setLayoutY(200);
-        Button btSair = new Button("Sair");
+        btSalvar.setLayoutY(300);
         btSair.setLayoutX(250);
-        btSair.setLayoutY(200);
-        Image img = new Image("/br/net/loch/badge/img/semfoto.jpg");
-        ImageView imgView = new ImageView(img);
+        btSair.setLayoutY(300);
         imgView.setLayoutX(350);
         imgView.setLayoutY(20);
         imgView.maxHeight(150);
         imgView.maxWidth(220);
-
-        pane.getChildren().addAll(txNome,
+        lbInfo.setLayoutX(50);
+        lbInfo.setLayoutY(350);
+         pane.getChildren().addAll(txNome,
                 txIdade,
                 lbIdade,
                 lbNome,
@@ -105,48 +158,13 @@ public class CadastroCarteirinha extends Application {
                 btFoto,
                 imgView,
                 btSair);
+        scene = new Scene(pane);
+         stage.setScene(scene);
 
-        Scene scene = new Scene(pane);
-        btFoto.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                File foto = carregaFoto();
-                if(foto==null){
-                    
-                }else{
-                    String path = foto.getAbsolutePath().replaceAll("\\\\", "/");
-                    try {
-                        File temp = new File("src/br/net/loch/badge/img/temp.jpg");
-                        File temp2 = new File("src/br/net/loch/badge/img/temp2.jpg");
-                      //  copyFile(foto, temp);
-                        ImageResizerService irs = new ImageResizerService(foto);
-                       byteFoto =irs.getNormal(200);
-                       irs.converterArayByteEmArquivo(temp2,byteFoto);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CadastroCarteirinha.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    System.out.println(path);
-                    Image novafoto = new Image("/br/net/loch/badge/img/temp2.jpg");
-                    imgView.setImage(novafoto);
-                    
-                }
-                
-            }
-        });
-        btSalvar.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                salvar(txNome.getText(), Integer.parseInt(txIdade.getText()), byteFoto);
-             }});
-        stage.setScene(scene);
         stage.show();
         
 
     }
-
-   
 
     private static void configureFileChooser(
             final FileChooser fileChooser) {
@@ -163,15 +181,26 @@ public class CadastroCarteirinha extends Application {
         fileChooser.setTitle("Escolher Foto");
         return fileChooser.showOpenDialog(stage);
     }
-    private void salvar(String nome, int idade, byte[] foto) {
+
+    private void salvar(String nome, String idade, byte[] foto, Label lbInfo) {
+        if (validaCampos(nome, idade, foto, lbInfo)) {
+            
         Carteirinha c = new Carteirinha();
         c.setNome(nome);
-        c.setIdade(idade);
+        c.setIdade(Integer.parseInt(idade));
         c.setFoto(foto);
-        CarteirinhaDaoSQLite cd = new CarteirinhaDaoSQLite();
-        cd.save(c);
+        DaoCarteirinha dc = new DaoCarteirinha();
+        dc.save(c);
+        JOptionPane.showMessageDialog(null, "Carteitinha de " + nome + " salva com sucesso.");
+        lbInfo.setText("Carteitinha de " + nome + " salva com sucesso.");
+       
         System.out.println("Salvo");
-        
+        initComponents();
+        }else
+            JOptionPane.showMessageDialog(null, "Erro: Campos não preenchidos.");
+    }
+    boolean validaCampos(String nome, String idade, byte[] foto, Label lbInfo) {
+        return !nome.trim().equals("")&& !idade.trim().equals("") && foto!=null;
     }
 
     /**
@@ -180,9 +209,11 @@ public class CadastroCarteirinha extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-        public static void copyFile(File source, File destination) throws IOException {
-        if (destination.exists())
+
+    public static void copyFile(File source, File destination) throws IOException {
+        if (destination.exists()) {
             destination.delete();
+        }
         FileChannel sourceChannel = null;
         FileChannel destinationChannel = null;
         try {
@@ -191,11 +222,13 @@ public class CadastroCarteirinha extends Application {
             sourceChannel.transferTo(0, sourceChannel.size(),
                     destinationChannel);
         } finally {
-            if (sourceChannel != null && sourceChannel.isOpen())
+            if (sourceChannel != null && sourceChannel.isOpen()) {
                 sourceChannel.close();
-            if (destinationChannel != null && destinationChannel.isOpen())
+            }
+            if (destinationChannel != null && destinationChannel.isOpen()) {
                 destinationChannel.close();
-       }
-   }
+            }
+        }
+    }
 
 }

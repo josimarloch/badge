@@ -23,7 +23,7 @@ import org.hibernate.type.StandardBasicTypes;
  */
 public class SQLiteDialect extends Dialect {
 
-    public SQLiteDialect() {
+        public SQLiteDialect() {
 
         registerColumnType(Types.BIT, "integer");
         registerColumnType(Types.TINYINT, "tinyint");
@@ -74,6 +74,7 @@ public class SQLiteDialect extends Dialect {
      * dialect append(insertString).
      * append("; ").append(getIdentitySelectString()). toString(); }
      */
+        @Override
     public String getIdentityColumnString() {
         // return "integer primary key autoincrement";
         return "integer";
