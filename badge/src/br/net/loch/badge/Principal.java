@@ -3,24 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.net.loch.badge;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -30,45 +22,54 @@ import javafx.stage.Stage;
  * @author josimar
  */
 public class Principal extends Application {
-    
+
     @Override
-  public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) {
     //  public BackgroundImage(Image image,
-                    //   BackgroundRepeat repeatX,
-                    //   BackgroundRepeat repeatY,
-                    //   BackgroundPosition position,
-                     //  BackgroundSize size);
-    BorderPane root = new BorderPane();
-    Scene scene = new Scene(root, 800, 600, Color.WHITE);
+        //   BackgroundRepeat repeatX,
+        //   BackgroundRepeat repeatY,
+        //   BackgroundPosition position,
+        //  BackgroundSize size);
+        BorderPane root = new BorderPane();
+        Scene scene = new Scene(root, 800, 600, Color.WHITE);
 
-    MenuBar menuBar = new MenuBar();
-    menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
-    root.setTop(menuBar);
+        MenuBar menuBar = new MenuBar();
+        menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
+        root.setTop(menuBar);
 
-    // File menu - new, save, exit
-    Menu carteirinhaMenu = new Menu("Carteirinha");
-    MenuItem newMenuItem = new MenuItem("Nova");
-    newMenuItem.setOnAction(ActionEvent -> new CadastroCarteirinha().start(primaryStage));
-    //newMenuItem.se
-    MenuItem saveMenuItem = new MenuItem("Pesquisar");
-    MenuItem exitMenuItem = new MenuItem("Exit");
-   // exitMenuItem.setOnAction(actionEvent -> Platform.exit());
+        // File menu - new, save, exit
+        Menu carteirinhaMenu = new Menu("Carteirinha");
+        MenuItem newMenuItem = new MenuItem("Nova");
+        Stage cadastroCarteirinha = new Stage();
+        cadastroCarteirinha.isAlwaysOnTop();
+        newMenuItem.setOnAction(ActionEvent
+                -> new CadastroCarteirinha().start(cadastroCarteirinha));
+        //newMenuItem.se
+        MenuItem saveMenuItem = new MenuItem("Pesquisar");
+        MenuItem exitMenuItem = new MenuItem("Exit");
+        // exitMenuItem.setOnAction(actionEvent -> Platform.exit());
 
-    carteirinhaMenu.getItems().addAll(newMenuItem, saveMenuItem,
-        new SeparatorMenuItem(), exitMenuItem);
+        carteirinhaMenu.getItems().addAll(newMenuItem, saveMenuItem,
+                new SeparatorMenuItem(), exitMenuItem);
 
-    Menu configurarMenu = new Menu("Configurar");
-   MenuItem mysqlMenuItem = new MenuItem("Mysql");
+        Menu configurarMenu = new Menu("Configurar");
+        MenuItem mysqlMenuItem = new MenuItem("Mysql");
+       Image  img = new Image("/br/net/loch/badge/img/badge.png");
+        ImageView imgView = new ImageView(img);
+        imgView.setLayoutX(168);
+        imgView.setLayoutY(152);
+
+        configurarMenu.getItems().addAll(mysqlMenuItem);
+
+        menuBar.getMenus().addAll(carteirinhaMenu, configurarMenu);
+        primaryStage.setTitle("Badge - Sistema de gestão de Carterinhas");
     
-    configurarMenu.getItems().addAll(mysqlMenuItem);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
-    menuBar.getMenus().addAll(carteirinhaMenu, configurarMenu);
-    primaryStage.setTitle("Badge - Sistema de gestão de Carterinhas");
-    primaryStage.setScene(scene);
-    primaryStage.show();
-  }
-  public static void main(String[] args) {
-    launch(args);
-  }
-    
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }

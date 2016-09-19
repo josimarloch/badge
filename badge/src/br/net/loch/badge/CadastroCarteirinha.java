@@ -48,69 +48,13 @@ public class CadastroCarteirinha extends Application {
     Image img;
     ImageView imgView;
     Label lbInfo;
-      AnchorPane pane;
-  Scene scene;
+    AnchorPane pane;
+    Scene scene;
+
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
-        initComponents();
-        btFoto.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event
-                    ) {
-                        File foto = carregaFoto();
-                        if (foto != null) {
-                            String path = foto.getAbsolutePath().replaceAll("\\\\", "/");
-                            File temp2 = null;
-                            try {
-                                File temp = new File("src/br/net/loch/badge/img/temp.jpg");
-                                temp2 = new File("src/temp2.jpg");
-                                //  copyFile(foto, temp);
-                                ImageResizerService irs = new ImageResizerService(foto);
-                                byteFoto = irs.getNormal(200);
-                                irs.converterArayByteEmArquivo(temp2, byteFoto);
-                            System.out.println(path);
-                            Image novafoto = new Image("file:"+temp2.getCanonicalPath());
-                            imgView.setImage(novafoto);
-                            } catch (IOException ex) {
-                                Logger.getLogger(CadastroCarteirinha.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-
-                        } else {
-                            
-                        }
-
-                    }
-                }
-        );
-        btSalvar.setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent event
-                    ) {
-                        salvar(txNome.getText(), txIdade.getText(), byteFoto, lbInfo);
-                    }
-                }
-        );
-        btSair.setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent event
-                    ) {
-                       stage.close();
-                     //  primaryStage.show();
-                    }
-                }
-        );
-       
-
-    }
-
-    public void initComponents() {
-            pane = new AnchorPane();
+         pane = new AnchorPane();
         pane.setPrefSize(600, 400);
 
         lbNome = new Label("Nome");
@@ -149,7 +93,7 @@ public class CadastroCarteirinha extends Application {
         imgView.maxWidth(220);
         lbInfo.setLayoutX(50);
         lbInfo.setLayoutY(350);
-         pane.getChildren().addAll(txNome,
+        pane.getChildren().addAll(txNome,
                 txIdade,
                 lbIdade,
                 lbNome,
@@ -159,10 +103,69 @@ public class CadastroCarteirinha extends Application {
                 imgView,
                 btSair);
         scene = new Scene(pane);
-         stage.setScene(scene);
+        stage.setScene(scene);
 
         stage.show();
-        
+        resetComponents();
+        btFoto.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event
+                    ) {
+                        File foto = carregaFoto();
+                        if (foto != null) {
+                            String path = foto.getAbsolutePath().replaceAll("\\\\", "/");
+                            File temp2 = null;
+                            try {
+                                File temp = new File("src/br/net/loch/badge/img/temp.jpg");
+                                temp2 = new File("src/temp2.jpg");
+                                //  copyFile(foto, temp);
+                                ImageResizerService irs = new ImageResizerService(foto);
+                                byteFoto = irs.getNormal(200);
+                                irs.converterArayByteEmArquivo(temp2, byteFoto);
+                                System.out.println(path);
+                                Image novafoto = new Image("file:" + temp2.getCanonicalPath());
+                                imgView.setImage(novafoto);
+                            } catch (IOException ex) {
+                                Logger.getLogger(CadastroCarteirinha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        } else {
+
+                        }
+
+                    }
+                }
+        );
+        btSalvar.setOnAction(
+                new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent event
+                    ) {
+                        salvar(txNome.getText(), txIdade.getText(), byteFoto, lbInfo);
+                    }
+                }
+        );
+        btSair.setOnAction(
+                new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent event
+                    ) {
+                        stage.close();
+                        //  primaryStage.show();
+                    }
+                }
+        );
+
+    }
+
+    public void resetComponents() {
+        txNome.setText("");
+        txIdade.setText("");
+        img = new Image("/br/net/loch/badge/img/semfoto.jpg");
+        imgView.setImage(img);       
 
     }
 
@@ -184,23 +187,25 @@ public class CadastroCarteirinha extends Application {
 
     private void salvar(String nome, String idade, byte[] foto, Label lbInfo) {
         if (validaCampos(nome, idade, foto, lbInfo)) {
-            
-        Carteirinha c = new Carteirinha();
-        c.setNome(nome);
-        c.setIdade(Integer.parseInt(idade));
-        c.setFoto(foto);
-        DaoCarteirinha dc = new DaoCarteirinha();
-        dc.save(c);
-        JOptionPane.showMessageDialog(null, "Carteitinha de " + nome + " salva com sucesso.");
-        lbInfo.setText("Carteitinha de " + nome + " salva com sucesso.");
-       
-        System.out.println("Salvo");
-        initComponents();
-        }else
+
+            Carteirinha c = new Carteirinha();
+            c.setNome(nome);
+            c.setIdade(Integer.parseInt(idade));
+            c.setFoto(foto);
+            DaoCarteirinha dc = new DaoCarteirinha();
+            dc.save(c);
+            JOptionPane.showMessageDialog(null, "Carteitinha de " + nome + " salva com sucesso.");
+            lbInfo.setText("Carteitinha de " + nome + " salva com sucesso.");
+
+            System.out.println("Salvo");
+            resetComponents();
+        } else {
             JOptionPane.showMessageDialog(null, "Erro: Campos não preenchidos.");
+        }
     }
+
     boolean validaCampos(String nome, String idade, byte[] foto, Label lbInfo) {
-        return !nome.trim().equals("")&& !idade.trim().equals("") && foto!=null;
+        return !nome.trim().equals("") && !idade.trim().equals("") && foto != null;
     }
 
     /**
