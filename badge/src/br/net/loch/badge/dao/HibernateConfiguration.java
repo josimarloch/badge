@@ -42,7 +42,7 @@ public class HibernateConfiguration {
             cfg.setProperty("hibernate.dialect", "br.net.loch.badge.dao.SQLiteDialect");
             cfg.setProperty("hibernate.connection.autocommit", "true");
             cfg.setProperty("hibernate.current_session_context_class", "thread");
-             cfg.setProperty("hibernate.hbm2ddl.auto", "update");
+           //  cfg.setProperty("hibernate.hbm2ddl.auto", "create");
          
             cfg.addAnnotatedClass(Usuario.class); // classes para serem mapeadas
             cfg.addAnnotatedClass(Carteirinha.class); // classes para serem mapeadas

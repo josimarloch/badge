@@ -5,6 +5,8 @@
  */
 package br.net.loch.badge;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -41,15 +43,24 @@ public class Principal extends Application {
         Menu carteirinhaMenu = new Menu("Carteirinha");
         MenuItem newMenuItem = new MenuItem("Nova");
         Stage cadastroCarteirinha = new Stage();
-        cadastroCarteirinha.isAlwaysOnTop();
+      //  cadastroCarteirinha.isAlwaysOnTop();
         newMenuItem.setOnAction(ActionEvent
                 -> new CadastroCarteirinha().start(cadastroCarteirinha));
         //newMenuItem.se
-        MenuItem saveMenuItem = new MenuItem("Pesquisar");
+        MenuItem pesquisaMenuItem = new MenuItem("Pesquisar");
+      
+                     Stage pesquisaCarteirinha = new Stage();
+        try {
+            pesquisaMenuItem.setOnAction(ActionEvent
+                    -> new PesquisaCarteirinhaView().start(pesquisaCarteirinha));
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         MenuItem exitMenuItem = new MenuItem("Exit");
         // exitMenuItem.setOnAction(actionEvent -> Platform.exit());
 
-        carteirinhaMenu.getItems().addAll(newMenuItem, saveMenuItem,
+        carteirinhaMenu.getItems().addAll(newMenuItem, pesquisaMenuItem,
                 new SeparatorMenuItem(), exitMenuItem);
 
         Menu configurarMenu = new Menu("Configurar");
