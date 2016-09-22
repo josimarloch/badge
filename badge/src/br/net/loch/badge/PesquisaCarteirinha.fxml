@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.PesquisaCarteirinhaController">
+  <children>
+    <Label layoutX="108.0" layoutY="14.0" text="Pesquisa Carteirinha Por Nome">
+      <effect>
+        <Reflection fraction="0.9" />
+      </effect>
+      <font>
+        <Font size="18.0" />
+      </font>
+    </Label>
+    <Label layoutX="55.0" layoutY="74.0" text="Nome:">
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Label>
+    <TextField fx:id="txNome" layoutX="100.0" layoutY="74.0" prefWidth="200.0" />
+    <Button layoutX="307.0" layoutY="74.0" mnemonicParsing="false" onAction="#geraPesquisa" text="Pesquisar" />
+    <ListView fx:id="lsView" layoutX="55.0" layoutY="121.0" prefHeight="230.0" prefWidth="323.0" />
+    <Button layoutX="55.0" layoutY="360.0" mnemonicParsing="false" text="Visualizar" />
+    <Button layoutX="149.0" layoutY="360.0" mnemonicParsing="false" text="Imprimir" />
+    <Button layoutX="249.0" layoutY="360.0" mnemonicParsing="false" text="Excluir" />
+    <Button cancelButton="true" layoutX="343.0" layoutY="360.0" mnemonicParsing="false" text="Sair" />
+  </children>
+</AnchorPane>
