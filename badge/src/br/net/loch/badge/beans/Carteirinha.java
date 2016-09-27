@@ -26,9 +26,13 @@ public class Carteirinha implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nome;
+    private String rg;
+    private String cpf;
     private byte[] foto;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar dataCadastro;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataNacimento;
     private int idade;
     @ManyToOne
     private Usuario usuarioCadastro;
@@ -105,6 +109,30 @@ public class Carteirinha implements Serializable {
     @Override
     public String toString() {
         return "br.net.loch.badge.beans.Cracha[ id=" + id + " ]";
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Calendar getDataNacimento() {
+        return dataNacimento;
+    }
+
+    public void setDataNacimento(Calendar dataNacimento) {
+        this.dataNacimento = dataNacimento;
     }
 
 }

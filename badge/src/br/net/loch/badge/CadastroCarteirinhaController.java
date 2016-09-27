@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.net.loch.badge;
 
 import br.net.loch.badge.beans.Carteirinha;
 import br.net.loch.badge.dao.DaoCarteirinha;
+//import eu.schudt.javafx.controls.calendar.DatePicker;
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javax.swing.JOptionPane;
+import util.ImageResizerService;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * FXML Controller class
@@ -29,23 +34,51 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCarteirinhaController {
 
-     @FXML
+    @FXML
     TextField txNome;
-     @FXML
-    TextField txDate;
-     @FXML
+   // @FXML
+   // TextField txDate;
+    @FXML
     TextField txCpf;
-     @FXML
-    TextField txRg;
-     @FXML
-      Image imgFoto;
+    @FXML
+    TextField txRG;
+    @FXML
+    Image imgFoto;
+    @FXML
     ImageView imgvFoto;
-    
-         public void resetComponents() {
+    @FXML
+    Button btSelectImg;
+    @FXML
+    Button btSalvar;
+    @FXML
+    private DatePicker birthdayDatePicker;
+
+        byte[] byteFoto;
+      
+        /*
+    @FXML
+    private void initialize() {
+        // Initialize the DatePicker for birthday
+        birthdayDatePicker = new DatePicker(new Locale("pt", "BR"));
+        birthdayDatePicker.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+        birthdayDatePicker.getCalendarView().todayButtonTextProperty().set("Today");
+        birthdayDatePicker.getCalendarView().setShowWeeks(false);
+        birthdayDatePicker.getStylesheets().add("DatePicker.css");
+
+  // Add DatePicker to grid
+    }
+        */
+
+    File foto;
+
+    public void resetComponents() {
+        btSalvar.setDisable(true);
         txNome.setText("");
-        txDate.setText("");
+    //  birthdayDatePicker.add
+        txCpf.setText("");
+        txRG.setText("");
         imgFoto = new Image("/br/net/loch/badge/img/semfoto.jpg");
-        imgvFoto.setImage(imgFoto);       
+        imgvFoto.setImage(imgFoto);
 
     }
 
@@ -58,24 +91,58 @@ public class CadastroCarteirinhaController {
         );
     }
 
-     public void carregaFoto() {
+    public void carregaFoto() {
         FileChooser fileChooser = new FileChooser();
         configureFileChooser(fileChooser);
         fileChooser.setTitle("Escolher Foto");
         //return fileChooser.showOpenDialog(null);
+        foto = fileChooser.showOpenDialog(null);
+
+        if (foto != null) {
+            String path = foto.getAbsolutePath().replaceAll("\\\\", "/");
+            File temp2 = null;
+            try {
+                File temp = new File("src/br/net/loch/badge/img/temp.jpg");
+                temp2 = new File("src/temp2.jpg");
+                //  copyFile(foto, temp);
+                ImageResizerService irs = new ImageResizerService(foto);
+                byteFoto = irs.getNormal(200);
+                irs.converterArayByteEmArquivo(temp2, byteFoto);
+                System.out.println(path);
+                Image novafoto = new Image("file:" + temp2.getCanonicalPath());
+                imgvFoto.setImage(novafoto);
+                //   Bindings.and
+                btSalvar.setDisable(false);
+            } catch (IOException ex) {
+                Logger.getLogger(CadastroCarteirinha.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
     }
 
-    private void salvar(String nome, String idade, byte[] foto, Label lbInfo) {
-        if (validaCampos(nome, idade, foto, lbInfo)) {
-
+    public void salvar() {
+            String nome = txNome.getText();
+            String cpf = txCpf.getText();
+            String rg = txRG.getText();
+           // birthdayDatePicker.getValue().
+            Date date = new Date(birthdayDatePicker.getValue().toEpochDay());
+            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+          //  String dateNiver=birthdayDatePicker.getPromptText() ;
+            
+        if (validaCampos(nome, cpf,rg,byteFoto, null)) {
             Carteirinha c = new Carteirinha();
-            c.setNome(nome);
-            c.setIdade(Integer.parseInt(idade));
-            c.setFoto(foto);
+            c.setNome(txNome.getText());
+            c.setDataNacimento(converteData(sd.format(date)));
+            c.setCpf(cpf);
+            c.setRg(rg);
+           // c.setIdade(Integer.parseInt(idade));
+            c.setFoto(byteFoto);
             DaoCarteirinha dc = new DaoCarteirinha();
             dc.save(c);
             JOptionPane.showMessageDialog(null, "Carteitinha de " + nome + " salva com sucesso.");
-            lbInfo.setText("Carteitinha de " + nome + " salva com sucesso.");
+           // lbInfo.setText("Carteitinha de " + nome + " salva com sucesso.");
 
             System.out.println("Salvo");
             resetComponents();
@@ -84,7 +151,23 @@ public class CadastroCarteirinhaController {
         }
     }
 
-    boolean validaCampos(String nome, String idade, byte[] foto, Label lbInfo) {
-        return !nome.trim().equals("") && !idade.trim().equals("") && foto != null;
+    boolean validaCampos(String nome, String cpf,String rg, byte[] foto, Label lbInfo) {
+      
+        return !nome.trim().equals("") &&foto != null;
+    }
+    public static Calendar converteData(String data) {
+        System.out.println("Formatando data: "+data);
+        String[] s = data.split("/");
+        try {
+            if (s.length == 3) {
+                String dia = s[0];
+                String mes = s[1];
+                String ano = s[2];
+                return new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes)-1, Integer.parseInt(dia));
+            }
+        } catch (NumberFormatException e) {
+           return null;
+        }
+        return null;
     }
 }

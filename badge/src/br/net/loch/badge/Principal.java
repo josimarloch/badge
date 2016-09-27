@@ -45,7 +45,7 @@ public class Principal extends Application {
         Stage cadastroCarteirinha = new Stage();
       //  cadastroCarteirinha.isAlwaysOnTop();
         newMenuItem.setOnAction(ActionEvent
-                -> new CadastroCarteirinha().start(cadastroCarteirinha));
+                -> new CadastroCarteirinhaView().start(cadastroCarteirinha));
         //newMenuItem.se
         MenuItem pesquisaMenuItem = new MenuItem("Pesquisar");
       

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import eu.schudt.javafx.controls.calendar.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.CadastroCarteirinhaController">
+<AnchorPane id="AnchorPane" fx:id="btClear" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.CadastroCarteirinhaController">
   <children>
     <Label id="txNome" layoutX="62.0" layoutY="98.0" text="Nome Completo:" />
     <Label id="tdDate" layoutX="47.0" layoutY="127.0" text="Data de Nacimento:" />
@@ -17,7 +18,7 @@
     <Label layoutX="133.0" layoutY="181.0" text="RG:" />
     <Label layoutX="125.0" layoutY="214.0" text="Foto:" />
     <TextField fx:id="txNome" layoutX="165.0" layoutY="95.0" prefWidth="200.0" />
-    <TextField fx:id="txDate" layoutX="165.0" layoutY="122.0" prefWidth="200.0" />
+    <javafx.scene.control.DatePicker fx:id="birthdayDatePicker" layoutX="165.0" layoutY="124.0" prefWidth="200.0" />
     <TextField id="txCPF" fx:id="txCpf" layoutX="165.0" layoutY="149.0" prefWidth="200.0" />
     <TextField id="txRg" fx:id="txRG" layoutX="165.0" layoutY="178.0" prefWidth="200.0" />
     <Label focusTraversable="false" layoutX="165.0" layoutY="31.0" text="Cadastro de Carteirinha" textAlignment="CENTER">
@@ -25,17 +26,18 @@
         <Font name="Times New Roman" size="24.0" />
       </font>
     </Label>
-    <ImageView fx:id="imgvFoto" fitHeight="196.0" fitWidth="154.00001525878906" layoutX="407.0" layoutY="95.0" pickOnBounds="true" preserveRatio="false">
+    <ImageView fx:id="imgvFoto" fitHeight="192.0" fitWidth="168.00001525878906" layoutX="393.0" layoutY="95.0" pickOnBounds="true" preserveRatio="false">
       <image>
         <Image url="@img/semfoto.jpg" fx:id="imgFoto" />
       </image>
     </ImageView>
-    <Button fx:id="btSelectImg" layoutX="165.0" layoutY="212.0" mnemonicParsing="false" onAction="#carregaFoto" prefWidth="200.0" text="Selecionar Imagem" />
-    <Button layoutX="45.0" layoutY="339.0" mnemonicParsing="false" text="Salvar " />
-    <Button layoutX="165.0" layoutY="339.0" mnemonicParsing="false" text="Limpar Tela" />
+    <Button fx:id="btSelectImg" disable="false" layoutX="165.0" layoutY="212.0" mnemonicParsing="false" onAction="#carregaFoto" prefWidth="200.0" text="Selecionar Imagem" />
+    <Button fx:id="btSalvar" disable="true" layoutX="45.0" layoutY="339.0" mnemonicParsing="false" onAction="#salvar" text="Salvar " />
+    <Button fx:id="btClear" layoutX="165.0" layoutY="339.0" mnemonicParsing="false" onAction="#resetComponents" text="Limpar Tela" />
     <Button layoutX="325.0" layoutY="339.0" mnemonicParsing="false" text="Sair" />
   </children>
   <stylesheets>
     <URL value="@cadastrocarteirinha.css" />
+    <URL value="@DatePicker.css" />
   </stylesheets>
 </AnchorPane>
