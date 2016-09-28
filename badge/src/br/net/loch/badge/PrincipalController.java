@@ -37,6 +37,7 @@ public class PrincipalController {
     @FXML
     TableColumn tbcStatus; 
     Stage novaCarteirinha;
+    Stage sinc;
     Stage pesquisa;
    // TableColumn<Integer, "id"> 
     public void popularTabela(){
@@ -55,6 +56,11 @@ public class PrincipalController {
         novaCarteirinha = new Stage();
         novaCarteirinha.setTitle("Cadastro de Carteirinha");
         new CadastroCarteirinhaView().start(novaCarteirinha);
+    }
+    public void abreSinc(){
+        sinc = new Stage();
+        sinc.setTitle("Gerenciar Sincronização");
+        new SincronizeView().start(sinc);
     }
     public void abrePesquisa(){
         pesquisa = new Stage();

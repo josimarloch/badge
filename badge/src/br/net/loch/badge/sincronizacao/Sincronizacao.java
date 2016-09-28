@@ -21,7 +21,7 @@ public class Sincronizacao {
 
     }
 
-    public void geraSincronizacaoServidorCliente() {
+    public Integer geraSincronizacaoServidorCliente() {
         DaoCarteirinhaRemota dcr = new DaoCarteirinhaRemota();
         DaoCarteirinha dcl = new DaoCarteirinha();
         geraSincronizacaoClienteServidor();
@@ -33,11 +33,12 @@ public class Sincronizacao {
             dcl.remover(cl);
         });
         List<Carteirinha> cRemoto = dcr.listar();
+        int remotas = cRemoto.size();
         for (Carteirinha cr : cRemoto) {
             cr.setId(null);
             dcl.save(cr);
         }
-        
+        return remotas;
     }
 
     private boolean checaStatus() {
@@ -47,12 +48,13 @@ public class Sincronizacao {
 
     }
 
-    public void geraSincronizacaoClienteServidor() {
+    public int geraSincronizacaoClienteServidor() {
         DaoCarteirinha dcl = new DaoCarteirinha();
         List<Carteirinha> nSincronizadas = dcl.getByStatus(false);
         DaoCarteirinhaRemota dcr = new DaoCarteirinhaRemota();
 
         System.out.println(nSincronizadas.size() + " carteirinhas não sincronizadas");
+        int ns = nSincronizadas.size();
         for (Carteirinha c : nSincronizadas) {
             int id = c.getId();
             c.setId(null);
@@ -64,6 +66,7 @@ public class Sincronizacao {
             dcl.save(c);
 
         }
+        return ns;
 
     }
 
