@@ -25,5 +25,16 @@ public class DaoCarteirinha extends DaoGenerics<Carteirinha>{
         
         return query.list();
     }
+    public Long getTotal(){
+        Query query = getsession().createQuery("SELECT COUNT(c.id) FROM Carteirinha c");
+        
+        return (Long) query.uniqueResult();
+    }
+    public List<Carteirinha> getByStatus(boolean sicronizado){
+        Query query = getsession().createQuery("SELECT c FROM Carteirinha c WHERE c.sincronizado= :status");
+        query.setParameter("status", sicronizado);
+        
+        return query.list();
+    }
     
 }

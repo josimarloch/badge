@@ -7,6 +7,7 @@ package br.net.loch.badge.beans;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,8 +30,12 @@ public class Carteirinha implements Serializable {
     private Integer altura;
     private String nome;
     private String rg;
+    private String cliente;
     private String cpf;
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] foto;
+    private boolean sincronizado;
+    private boolean editado;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar dataCadastro;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -38,6 +43,39 @@ public class Carteirinha implements Serializable {
     private int idade;
     @ManyToOne
     private Usuario usuarioCadastro;
+
+    public Carteirinha() {
+         this.dataCadastro = Calendar.getInstance();
+         this.sincronizado=false;
+         this.editado=false;
+       
+    }
+    
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public boolean isSincronizado() {
+        return sincronizado;
+    }
+
+    public void setSincronizado(boolean sincronizado) {
+        this.sincronizado = sincronizado;
+    }
+
+    public boolean isEditado() {
+        return editado;
+    }
+
+    public void setEditado(boolean editado) {
+        this.editado = editado;
+    }
+    
     
 
     public Calendar getDataCadastro() {
@@ -56,9 +94,7 @@ public class Carteirinha implements Serializable {
         this.usuarioCadastro = usuarioCadastro;
     }
 
-    public Carteirinha() {
-        this.dataCadastro = Calendar.getInstance();
-    }
+       
 
     public String getNome() {
         return nome;

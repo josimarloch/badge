@@ -26,6 +26,7 @@ import util.ImageResizerService;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import util.Seriais;
 
 /**
  * FXML Controller class
@@ -145,6 +146,8 @@ public class CadastroCarteirinhaController {
             c.setLargura(largura);
            // c.setIdade(Integer.parseInt(idade));
             c.setFoto(byteFoto);
+                String cpuSerial = Seriais.getCPUSerial();
+                c.setCliente(cpuSerial);
             DaoCarteirinha dc = new DaoCarteirinha();
             dc.save(c);
             JOptionPane.showMessageDialog(null, "Carteitinha de " + nome + " salva com sucesso.");
