@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -35,6 +36,8 @@ public class PrincipalController {
     TableColumn tbcIdade; 
     @FXML
     TableColumn tbcStatus; 
+    Stage novaCarteirinha;
+    Stage pesquisa;
    // TableColumn<Integer, "id"> 
     public void popularTabela(){
           DaoCarteirinha dc = new DaoCarteirinha();
@@ -47,5 +50,15 @@ public class PrincipalController {
        // byName.stream().forEach((carteirinha) -> {
             //tbcNome.
         //});
+    }
+    public void abreCadastro(){
+        novaCarteirinha = new Stage();
+        novaCarteirinha.setTitle("Cadastro de Carteirinha");
+        new CadastroCarteirinhaView().start(novaCarteirinha);
+    }
+    public void abrePesquisa(){
+        pesquisa = new Stage();
+        pesquisa.setTitle("Pesquisar Carteirinha");
+        new PesquisaCarteirinhaView().start(pesquisa);
     }
 }

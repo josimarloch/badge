@@ -7,40 +7,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="798.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.PrincipalController">
-  <children>
-    <MenuBar layoutX="14.0" layoutY="14.0" prefWidth="770.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Ultimos Cadastros" onAction="#popularTabela"   />
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Unspecified Menu" />
-      </menus>
-    </MenuBar>
-    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="584.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true" />
-    <TableView fx:id="tbLast" layoutX="14.0" layoutY="197.0" prefHeight="325.0" prefWidth="491.0">
-      <columns>
-        <TableColumn prefWidth="75.0" text="ID" fx:id="tbcId" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="266.0" text="Nome" fx:id="tbcNome" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="71.0" text="Idade" fx:id="tbcIdade" />
-      </columns>
-    </TableView>
-  </children>
-  <stylesheets>
-    <URL value="@principal.css" />
-  </stylesheets>
+    <children>
+        <MenuBar layoutX="0.0" layoutY="2.0" prefWidth="798.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Carteirinha">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#abreCadastro" text="Nova" fx:id="menuNova" />
+                        <MenuItem mnemonicParsing="false" onAction="#abrePesquisa" text="Pesquisar" />
+                        <MenuItem mnemonicParsing="false" text="Sair" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Configurações">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Mysql Remoto" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="584.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true" />
+        <TableView fx:id="tbLast" layoutX="14.0" layoutY="197.0" prefHeight="325.0" prefWidth="491.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="ID" fx:id="tbcId" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="266.0" text="Nome" fx:id="tbcNome" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="71.0" text="Idade" fx:id="tbcIdade" />
+            </columns>
+        </TableView>
+        <ImageView fitHeight="165.4722240672392" fitWidth="259.0" layoutX="526.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@img/badge.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="205.0" layoutY="47.0" text="Badge - Sistema de controle de Carteirinhas">
+            <effect>
+                <Reflection fraction="0.9" />
+            </effect>
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="25.0" layoutY="176.0" text="Ultimos cadastros:" />
+    </children>
+    <stylesheets>
+        <URL value="@principal.css" />
+    </stylesheets>
 </AnchorPane>
