@@ -5,6 +5,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -23,12 +24,18 @@
         <Font size="14.0" />
       </font>
     </Label>
-    <TextField fx:id="txNome" layoutX="100.0" layoutY="74.0" prefWidth="200.0" />
-    <Button layoutX="307.0" layoutY="74.0" mnemonicParsing="false" onAction="#geraPesquisa" text="Pesquisar" />
-    <ListView fx:id="lsView" layoutX="55.0" layoutY="121.0" prefHeight="230.0" prefWidth="323.0" />
+    <TextField fx:id="txNome" layoutX="100.0" layoutY="74.0" onAction="#geraPesquisa" onKeyReleased="#geraPesquisa" prefWidth="200.0" />
+    <Button layoutX="307.0" layoutY="74.0" mnemonicParsing="false" onAction="#geraPesquisa2" text="Pesquisar" />
+    <ListView fx:id="lsView" layoutX="55.0" layoutY="121.0" onKeyReleased="#atualizaImagem" onMouseClicked="#atualizaImagem" prefHeight="230.0" prefWidth="323.0" />
     <Button layoutX="55.0" layoutY="360.0" mnemonicParsing="false" text="Visualizar" />
     <Button layoutX="149.0" layoutY="360.0" mnemonicParsing="false" text="Imprimir" />
     <Button layoutX="249.0" layoutY="360.0" mnemonicParsing="false" text="Excluir" />
     <Button cancelButton="true" layoutX="343.0" layoutY="360.0" mnemonicParsing="false" text="Sair" />
+    <ImageView fx:id="imgvPreview" fitHeight="174.0" fitWidth="145.6666717529297" layoutX="417.0" layoutY="131.0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@img/semfoto.jpg" />
+      </image>
+    </ImageView>
+    <Label layoutX="447.0" layoutY="105.0" text="Preview...." />
   </children>
 </AnchorPane>
