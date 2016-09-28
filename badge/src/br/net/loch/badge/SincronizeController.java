@@ -53,9 +53,9 @@ public class SincronizeController implements Initializable {
     public void sincronizaClienteServidorCliente() {
         btSCVC.setDisable(true);
         Sincronizacao sinc = new Sincronizacao();
-        sinc.geraSincronizacaoServidorCliente();
-        try {
 
+        try {
+        sinc.geraSincronizacaoServidorCliente();
             int ns = sinc.geraSincronizacaoServidorCliente();
             JOptionPane.showMessageDialog(null, "Sincronização concluida, " + ns + " carteirinhas Resincronizadas Para o banco Local");
         btSCVC.setDisable(false);

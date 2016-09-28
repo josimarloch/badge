@@ -8,12 +8,9 @@ package br.net.loch.badge;
 
 import br.net.loch.badge.beans.Carteirinha;
 import br.net.loch.badge.dao.DaoCarteirinha;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,6 +35,7 @@ public class PrincipalController {
     TableColumn tbcStatus; 
     Stage novaCarteirinha;
     Stage sinc;
+    Stage config;
     Stage pesquisa;
    // TableColumn<Integer, "id"> 
     public void popularTabela(){
@@ -66,5 +64,10 @@ public class PrincipalController {
         pesquisa = new Stage();
         pesquisa.setTitle("Pesquisar Carteirinha");
         new PesquisaCarteirinhaView().start(pesquisa);
+    }
+    public void abreConfig(){
+        config = new Stage();
+        config.setTitle("Configuração Mysql Remoto");
+        new ConfigView().start(config);
     }
 }
