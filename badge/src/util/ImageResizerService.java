@@ -69,10 +69,15 @@ public class ImageResizerService {
     }
     public int getLarguraOriginal() throws IOException{
           BufferedImage imagem = ImageIO.read(this.arquivo);
-
         return imagem.getWidth();
-        
-       
+    }
+    public int getLargura(File foto) throws IOException{
+          BufferedImage imagem = ImageIO.read(foto);
+        return imagem.getWidth();
+    }
+    public int getAltura(File foto) throws IOException{
+          BufferedImage imagem = ImageIO.read(foto);
+        return imagem.getHeight();
     }
     private byte[] processa(int larguraAlvo) throws IOException {
 

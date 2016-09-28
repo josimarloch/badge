@@ -25,6 +25,8 @@ public class Carteirinha implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private Integer largura;
+    private Integer altura;
     private String nome;
     private String rg;
     private String cpf;
@@ -36,6 +38,7 @@ public class Carteirinha implements Serializable {
     private int idade;
     @ManyToOne
     private Usuario usuarioCadastro;
+    
 
     public Calendar getDataCadastro() {
         return dataCadastro;
@@ -133,6 +136,22 @@ public class Carteirinha implements Serializable {
 
     public void setDataNacimento(Calendar dataNacimento) {
         this.dataNacimento = dataNacimento;
+    }
+
+    public Integer getLargura() {
+        return largura;
+    }
+
+    public void setLargura(Integer largura) {
+        this.largura = largura;
+    }
+
+    public Integer getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Integer altura) {
+        this.altura = altura;
     }
 
 }
