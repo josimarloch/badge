@@ -23,7 +23,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Configurações">
           <items>
-            <MenuItem mnemonicParsing="false" text="Mysql Remoto" />
+            <MenuItem mnemonicParsing="false" onAction="#abreConfig" text="Mysql Remoto" />
             <MenuItem mnemonicParsing="false" onAction="#abreSinc" text="Sincronização" />
           </items>
         </Menu>
