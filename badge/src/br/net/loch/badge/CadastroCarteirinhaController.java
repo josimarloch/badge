@@ -54,7 +54,8 @@ public class CadastroCarteirinhaController {
     private DatePicker birthdayDatePicker;
 
         byte[] byteFoto;
-      
+      private int altura;
+      private int largura;
         /*
     @FXML
     private void initialize() {
@@ -79,6 +80,7 @@ public class CadastroCarteirinhaController {
         txRG.setText("");
         imgFoto = new Image("/br/net/loch/badge/img/semfoto.jpg");
         imgvFoto.setImage(imgFoto);
+       
 
     }
 
@@ -106,11 +108,13 @@ public class CadastroCarteirinhaController {
                 temp2 = new File("src/temp2.jpg");
                 //  copyFile(foto, temp);
                 ImageResizerService irs = new ImageResizerService(foto);
-                byteFoto = irs.getNormal(200);
+                this.byteFoto = irs.getNormal(200);
+                
                 irs.converterArayByteEmArquivo(temp2, byteFoto);
-                System.out.println(path);
+                this.altura =irs.getAltura(temp2);
+                this.largura = irs.getLargura(temp2);
                 Image novafoto = new Image("file:" + temp2.getCanonicalPath());
-                imgvFoto.setImage(novafoto);
+                this.imgvFoto.setImage(novafoto);
                 //   Bindings.and
                 btSalvar.setDisable(false);
             } catch (IOException ex) {
@@ -137,6 +141,8 @@ public class CadastroCarteirinhaController {
             c.setDataNacimento(converteData(sd.format(date)));
             c.setCpf(cpf);
             c.setRg(rg);
+            c.setAltura(altura);
+            c.setLargura(largura);
            // c.setIdade(Integer.parseInt(idade));
             c.setFoto(byteFoto);
             DaoCarteirinha dc = new DaoCarteirinha();
