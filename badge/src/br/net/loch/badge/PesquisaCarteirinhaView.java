@@ -34,7 +34,7 @@ public class PesquisaCarteirinhaView extends Application{
         Parent fxmlParent;
         try {
             fxmlParent = (Parent) FXMLLoader.load(url);
-        primaryStage.setScene(new Scene(fxmlParent,600,400));
+        primaryStage.setScene(new Scene(fxmlParent,660,440));
         primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(PesquisaCarteirinhaView.class.getName()).log(Level.SEVERE, null, ex);

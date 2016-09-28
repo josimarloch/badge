@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.PesquisaCarteirinhaController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="634.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.PesquisaCarteirinhaController">
   <children>
-    <Label layoutX="108.0" layoutY="14.0" text="Pesquisa Carteirinha Por Nome">
+    <Label blendMode="DARKEN" layoutX="108.0" layoutY="14.0" text="Pesquisa Carteirinha Por Nome">
       <effect>
         <Reflection fraction="0.9" />
       </effect>
@@ -31,7 +31,7 @@
     <Button layoutX="149.0" layoutY="360.0" mnemonicParsing="false" text="Imprimir" />
     <Button layoutX="249.0" layoutY="360.0" mnemonicParsing="false" text="Excluir" />
     <Button cancelButton="true" layoutX="343.0" layoutY="360.0" mnemonicParsing="false" text="Sair" />
-    <ImageView fx:id="imgvPreview" fitHeight="174.0" fitWidth="145.6666717529297" layoutX="417.0" layoutY="131.0" pickOnBounds="true" preserveRatio="false">
+    <ImageView fx:id="imgvPreview" fitHeight="230.0" fitWidth="180.6666717529297" layoutX="414.0" layoutY="121.0" pickOnBounds="true" preserveRatio="false">
       <image>
         <Image url="@img/semfoto.jpg" />
       </image>

@@ -78,9 +78,10 @@ public class PesquisaCarteirinhaController {
     public void atualizaImagem() {
         int index = lsView.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-
             Carteirinha c = carteirinhas.get(index);
-            imgvPreview.setImage(convertToJavaFXImage(c.getFoto(), 200, 150));
+            this.imgvPreview.setFitWidth(c.getLargura());
+            this.imgvPreview.setFitHeight(c.getAltura());
+            imgvPreview.setImage(convertToJavaFXImage(c.getFoto(), c.getLargura(), c.getAltura()));
         }
     }
 
