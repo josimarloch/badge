@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.ConfigController">
+  <children>
+    <Label layoutX="170.0" layoutY="39.0" text="Configurações Mysql Remoto">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </Label>
+    <Label layoutX="87.0" layoutY="89.0" text="Host:">
+      <font>
+        <Font size="14.0" fx:id="x1" />
+      </font>
+    </Label>
+    <TextField fx:id="txHost" layoutX="137.0" layoutY="89.0" prefWidth="200.0" />
+    <Label font="$x1" layoutX="87.0" layoutY="126.0" prefWidth="31.999908447265625" text="User:" />
+    <TextField id="txPass" fx:id="txUser" layoutX="137.0" layoutY="125.0" prefWidth="200.0" />
+    <Label font="$x1" layoutX="70.0" layoutY="169.0" text="Passwd:" />
+    <Label font="$x1" layoutX="101.0" layoutY="209.0" text="DB:" />
+    <TextField fx:id="txDB" layoutX="137.0" layoutY="207.0" prefWidth="200.0" />
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="397.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@img/create-mysql-database.jpg" />
+      </image>
+    </ImageView>
+    <Button fx:id="btSave" defaultButton="true" layoutX="81.0" layoutY="312.0" mnemonicParsing="false" onAction="#salvaConfig" text="Salvar Configuração" />
+    <Button fx:id="bcTeste" layoutX="244.0" layoutY="312.0" mnemonicParsing="false" text="Testar Comexão" />
+    <Button fx:id="bxExit" cancelButton="true" layoutX="393.0" layoutY="312.0" mnemonicParsing="false" text="Sair" />
+    <PasswordField fx:id="txPass" layoutX="137.0" layoutY="168.0" prefWidth="200.0" />
+  </children>
+</AnchorPane>
