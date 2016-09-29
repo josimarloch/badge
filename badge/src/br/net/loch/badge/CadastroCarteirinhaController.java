@@ -7,6 +7,7 @@ package br.net.loch.badge;
 
 import br.net.loch.badge.beans.Carteirinha;
 import br.net.loch.badge.dao.DaoCarteirinha;
+import br.net.loch.badge.util.Validacoes;
 //import eu.schudt.javafx.controls.calendar.DatePicker;
 import java.io.File;
 import java.io.IOException;
@@ -92,6 +93,10 @@ public class CadastroCarteirinhaController {
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
+    }
+    public void geraCPF(){
+        String CPF = Validacoes.geraCPF();
+        txCpf.setText(CPF);
     }
 
     public void carregaFoto() {
