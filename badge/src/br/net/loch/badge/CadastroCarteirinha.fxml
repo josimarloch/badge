@@ -10,10 +10,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="btClear" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.CadastroCarteirinhaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.CadastroCarteirinhaController">
   <children>
-    <Label id="txNome" layoutX="62.0" layoutY="98.0" text="Nome Completo:" />
-    <Label id="tdDate" layoutX="47.0" layoutY="127.0" text="Data de Nacimento:" />
+    <Label id="txNome" layoutX="60.0" layoutY="98.0" text="Nome Completo:" >
+        <font>
+        <Font name="Times New Roman" size="12.0" />
+        </font>
+    </Label>
+    <Label id="tdDate" layoutX="40.0" layoutY="127.0" text="Data de Nacimento:" >
+        <font>
+        <Font name="Times New Roman" size="12.0" />
+        </font>
+    </Label>
     <Label layoutX="129.0" layoutY="152.0" text="CPF:" />
     <Label layoutX="133.0" layoutY="181.0" text="RG:" />
     <Label layoutX="125.0" layoutY="214.0" text="Foto:" />
@@ -35,9 +43,9 @@
     <Button fx:id="btSalvar" disable="true" layoutX="45.0" layoutY="339.0" mnemonicParsing="false" onAction="#salvar" text="Salvar " />
     <Button fx:id="btClear" layoutX="165.0" layoutY="339.0" mnemonicParsing="false" onAction="#resetComponents" text="Limpar Tela" />
     <Button layoutX="325.0" layoutY="339.0" mnemonicParsing="false" text="Sair" />
+    <Button fx:id="btGCPF" layoutX="425.0" layoutY="339.0" mnemonicParsing="false"  onAction="#geraCPF" text="Gerar CPF" />
   </children>
   <stylesheets>
     <URL value="@cadastrocarteirinha.css" />
-    <URL value="@DatePicker.css" />
   </stylesheets>
 </AnchorPane>
