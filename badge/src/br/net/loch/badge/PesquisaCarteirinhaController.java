@@ -24,6 +24,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -32,6 +33,8 @@ import javafx.scene.image.ImageView;
 public class PesquisaCarteirinhaController {
 
     // @() xmlns:fx="http://javafx.com/fxml/1"
+    @FXML
+    AnchorPane apPC;
     @FXML
     Label lbNome;
     @FXML
@@ -95,5 +98,8 @@ public class PesquisaCarteirinhaController {
             System.out.println("Deu pau..." + ex);
         }
         return image;
+    }
+    public void close(){
+       // apPC.getParent().getc
     }
 }
