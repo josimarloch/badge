@@ -7,6 +7,7 @@ package br.net.loch.badge;
 
 import br.net.loch.badge.beans.Carteirinha;
 import br.net.loch.badge.dao.DaoCarteirinha;
+import br.net.loch.badge.temp.Dados;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -46,35 +48,37 @@ public class PesquisaCarteirinhaController {
     @FXML
     ImageView imgvPreview;
     List<Carteirinha> carteirinhas;
+    Stage carteirinha;
 
     public void geraPesquisa() {
         // lsView = new ListView();
-        if(txNome.getText().length()>2){
-            
-        DaoCarteirinha dc = new DaoCarteirinha();
-        ObservableList<String> items = FXCollections.observableArrayList();
-        carteirinhas = dc.getByName(txNome.getText());
-        carteirinhas.stream().forEach((carteirinha) -> {
-            items.add(carteirinha.getNome());
-        });
-        lsView.setItems(items);
+        if (txNome.getText().length() > 2) {
 
-        System.out.println("Aguarde... pesquisando por " + txNome.getText());
+            DaoCarteirinha dc = new DaoCarteirinha();
+            ObservableList<String> items = FXCollections.observableArrayList();
+            carteirinhas = dc.getByName(txNome.getText());
+            carteirinhas.stream().forEach((carteirinha) -> {
+                items.add(carteirinha.getNome());
+            });
+            lsView.setItems(items);
+
+            System.out.println("Aguarde... pesquisando por " + txNome.getText());
         }
     }
+
     public void geraPesquisa2() {
         // lsView = new ListView();
-        if(txNome.getText().length()>0){
-            
-        DaoCarteirinha dc = new DaoCarteirinha();
-        ObservableList<String> items = FXCollections.observableArrayList();
-        carteirinhas = dc.getByName(txNome.getText());
-        carteirinhas.stream().forEach((carteirinha) -> {
-            items.add(carteirinha.getNome());
-        });
-        lsView.setItems(items);
+        if (txNome.getText().length() > 0) {
 
-        System.out.println("Aguarde... pesquisando por " + txNome.getText());
+            DaoCarteirinha dc = new DaoCarteirinha();
+            ObservableList<String> items = FXCollections.observableArrayList();
+            carteirinhas = dc.getByName(txNome.getText());
+            carteirinhas.stream().forEach((carteirinha) -> {
+                items.add(carteirinha.getNome());
+            });
+            lsView.setItems(items);
+
+            System.out.println("Aguarde... pesquisando por " + txNome.getText());
         }
     }
 
@@ -85,6 +89,17 @@ public class PesquisaCarteirinhaController {
             this.imgvPreview.setFitWidth(c.getLargura());
             this.imgvPreview.setFitHeight(c.getAltura());
             imgvPreview.setImage(convertToJavaFXImage(c.getFoto(), c.getLargura(), c.getAltura()));
+        }
+    }
+
+    public void abreCarteirinha() {
+        int index = lsView.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            Carteirinha c = carteirinhas.get(index);
+            Dados.put("Carteitinha_foto", c);
+            carteirinha = new Stage();
+            carteirinha.setTitle("Carteirinha View");
+            new CarteirinhaView().start(carteirinha);
         }
     }
 
@@ -99,7 +114,8 @@ public class PesquisaCarteirinhaController {
         }
         return image;
     }
-    public void close(){
-       // apPC.getParent().getc
+
+    public void close() {
+        // apPC.getParent().getc
     }
 }
