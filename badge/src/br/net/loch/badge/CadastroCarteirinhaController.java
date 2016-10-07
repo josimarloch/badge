@@ -27,6 +27,7 @@ import util.ImageResizerService;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javafx.scene.layout.Border;
 import util.Seriais;
 
 /**
@@ -98,6 +99,15 @@ public class CadastroCarteirinhaController {
         String CPF = Validacoes.geraCPF();
         txCpf.setText(CPF);
     }
+    public void validaCPF(){
+        String CPF = txCpf.getText();
+        if(Validacoes.validaCPF(CPF)){
+            System.out.println("CPF COrreto");
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro, CPF inválido.");
+        txCpf.setBorder(Border.EMPTY);
+        }
+    }
 
     public void carregaFoto() {
         FileChooser fileChooser = new FileChooser();
@@ -166,8 +176,8 @@ public class CadastroCarteirinhaController {
     }
 
     boolean validaCampos(String nome, String cpf,String rg, byte[] foto, Label lbInfo) {
-      
-        return !nome.trim().equals("") &&foto != null;
+      validaCPF();
+        return Validacoes.validaCPF(cpf) && !nome.trim().equals("") &&foto != null;
     }
     public static Calendar converteData(String data) {
         System.out.println("Formatando data: "+data);
