@@ -5,6 +5,8 @@
  */
 package br.net.loch.badge;
 
+import br.net.loch.badge.dao.DaoCarteirinha;
+import br.net.loch.badge.dao.DaoCarteirinhaRemota;
 import br.net.loch.badge.sincronizacao.Sincronizacao;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javax.swing.JOptionPane;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -24,6 +27,12 @@ public class SincronizeController implements Initializable {
     Button btSCV;
     @FXML
     Button btSCVC;
+    @FXML
+    Label lbStatus;
+    @FXML
+    Label lbLocal;
+    @FXML
+    Label lbRemoto;
 
     /**
      * Initializes the controller class.
@@ -34,6 +43,34 @@ public class SincronizeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       // checaStstus();
+    }
+
+    public void checaStstus() {
+        DaoCarteirinhaRemota dcr = new DaoCarteirinhaRemota();
+        DaoCarteirinha dcl = new DaoCarteirinha();
+        Long totalL;
+        Long totalR;
+        String status = "";
+        try {
+            totalR = dcr.getTotal();
+            lbRemoto.setText(""+totalR);
+            status+="Servidor Remoto Ok";
+        } catch (Exception e) {
+            lbRemoto.setText("Erro Conexão Servidor remoto");
+            status+=" - Erro No servisor Remoto";
+
+        }
+        try {
+            totalL = dcl.getTotal();
+            lbLocal.setText(""+totalL);
+            status+=" - Servidor Local Ok";
+        } catch (Exception e) {
+            status+=" - Erro No servisor local";
+            lbLocal.setText("Erro AO OBTER DADOS LOCAIS");
+
+        }
+        lbStatus.setText(status);
     }
 
     public void sincronizaClienteServidor() {
@@ -55,13 +92,13 @@ public class SincronizeController implements Initializable {
         Sincronizacao sinc = new Sincronizacao();
 
         try {
-        sinc.geraSincronizacaoServidorCliente();
+            sinc.geraSincronizacaoServidorCliente();
             int ns = sinc.geraSincronizacaoServidorCliente();
             JOptionPane.showMessageDialog(null, "Sincronização concluida, " + ns + " carteirinhas Resincronizadas Para o banco Local");
-        btSCVC.setDisable(false);
+            btSCVC.setDisable(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro de Sincronização? " + e);
-        btSCVC.setDisable(false);
+            btSCVC.setDisable(false);
 
         }
     }

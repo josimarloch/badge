@@ -29,6 +29,7 @@ public class Config {
         Properties props = new Properties();
         FileInputStream conf = new FileInputStream(
                 "src/config/db.properties");
+        System.out.println(props);
 
         props.load(conf);
 

@@ -5,6 +5,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.SincronizeController">
   <children>
@@ -12,10 +13,29 @@
       <tabs>
         <Tab text="Status de Sincronização">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="171.0" layoutY="26.0" text="Status da Sincronização">
+                  <font>
+                    <Font name="Arial" size="20.0" />
+                  </font>
+                </Label>
+                <Label layoutX="58.0" layoutY="59.0" text="Status:">
+                  <font>
+                    <Font name="Arial" size="14.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Label fx:id="lbStatus" font="$x1" layoutX="196.0" layoutY="59.0" text="Checando..." />
+                <Label font="$x1" layoutX="58.0" layoutY="90.0" text="Registros Locais" />
+                <Label font="$x1" layoutX="58.0" layoutY="126.0" text="Registros Remotos:" />
+                <Label fx:id="lbLocal" font="$x1" layoutX="196.0" layoutY="90.0" text="Checando..." />
+                <Label fx:id="lbRemoto" font="$x1" layoutX="196.0" layoutY="126.0" text="Checando..." />
+                <Button layoutX="58.0" layoutY="252.0" mnemonicParsing="false" onAction="#checaStstus" text="Atualizar Status..." />
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Configurações">
+        <Tab text="Sincronizar">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>

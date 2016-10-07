@@ -6,7 +6,6 @@
 
 package br.net.loch.badge.temp;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  *

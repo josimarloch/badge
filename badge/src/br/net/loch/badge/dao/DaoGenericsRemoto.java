@@ -17,6 +17,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+
 public class DaoGenericsRemoto<T>  {
 
     static Session session = null;
@@ -29,10 +30,10 @@ public class DaoGenericsRemoto<T>  {
     protected Session getsession() {
        // session = HibernateConfiguration.getSessionFactory().getCurrentSession();
         if (session == null) {
-            session = HibernateConfigurationRemoto.getSessionFactory().openSession();
+            session = new HibernateConfigurationRemoto().getSessionFactory().openSession();
             return session;
         }else if(!session.isConnected()) {
-            session = HibernateConfigurationRemoto.getSessionFactory().openSession();
+            session = new HibernateConfigurationRemoto().getSessionFactory().openSession();
             return session;
         }else{
             return session;
@@ -55,7 +56,7 @@ public class DaoGenericsRemoto<T>  {
 
 
     public void remover(T o) {
-        session = HibernateConfiguration.getSessionFactory().openSession();
+        session = getsession();
         session.delete(o);
         session.flush();
     }
@@ -99,7 +100,7 @@ public class DaoGenericsRemoto<T>  {
     public List<T> listar(String filtro) {
         List<T> lista = null;
         if (filtro != null) {
-            session = HibernateConfigurationRemoto.getSessionFactory().openSession();
+            session = getsession();
             Query query = session.createQuery(filtro);
             lista = query.list();
             session.flush();
@@ -109,7 +110,7 @@ public class DaoGenericsRemoto<T>  {
 
  
     public List<T> listar() {
-        session = HibernateConfigurationRemoto.getSessionFactory().openSession();
+        session = getsession();
         Query query = session.createQuery("From " + clazz.getSimpleName());
         List<T> lista = query.list();
         session.flush();
