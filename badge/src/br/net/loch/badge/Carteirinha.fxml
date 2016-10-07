@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="314.0" prefWidth="220.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.net.loch.badge.CarteirinhaController">
+  <children>
+    <ImageView fx:id="imgvFoto" fitHeight="140.0" fitWidth="110.0" layoutX="56.0" layoutY="27.0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@img/semfoto.jpg" />
+      </image>
+    </ImageView>
+    <Label fx:id="txNome" layoutX="14.0" layoutY="202.0" prefHeight="23.0" prefWidth="192.0" text="Nome:" textAlignment="JUSTIFY" textOverrun="ELLIPSIS" underline="false" wrapText="true">
+      <font>
+        <Font name="Arial" size="14.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label id="txNome" fx:id="txID" layoutX="14.0" layoutY="179.0" prefHeight="23.0" prefWidth="73.0" text="ID" textAlignment="CENTER" textOverrun="ELLIPSIS" underline="false" wrapText="true">
+      <font>
+        <Font name="Arial Bold" size="14.0" />
+      </font>
+    </Label>
+    <Label id="txNome" font="$x1" layoutX="14.0" layoutY="225.0" prefHeight="23.0" prefWidth="192.0" text="CPF:" textAlignment="JUSTIFY" textOverrun="ELLIPSIS" underline="false" wrapText="true" />
+    <Label id="txNome" font="$x1" layoutX="14.0" layoutY="248.0" prefHeight="23.0" prefWidth="192.0" text="RG" textAlignment="JUSTIFY" textOverrun="ELLIPSIS" underline="false" wrapText="true" />
+    <Label id="txNome" layoutX="14.0" layoutY="270.0" prefHeight="23.0" prefWidth="192.0" text="DT Nasc:" textAlignment="JUSTIFY" textOverrun="ELLIPSIS" underline="false" wrapText="true">
+      <font>
+        <Font name="Arial" size="12.0" />
+      </font>
+    </Label>
+    <Label fx:id="lbID" layoutX="82.0" layoutY="183.0" prefWidth="124.0" text="" />
+    <Label id="lbID" fx:id="lbNome" layoutX="82.0" layoutY="206.0" prefWidth="124.0" text="" />
+    <Label id="lbID" fx:id="lbCPF" layoutX="82.0" layoutY="229.0" prefWidth="124.0" text="" />
+    <Label id="lbID" fx:id="lbRG" layoutX="82.0" layoutY="252.0" prefWidth="124.0" text="" />
+    <Label id="lbID" fx:id="lbDT" layoutX="82.0" layoutY="274.0" prefWidth="124.0" text="" />
+  </children>
+  <stylesheets>
+    <URL value="@carteirinha.css" />
+  </stylesheets>
+</AnchorPane>
