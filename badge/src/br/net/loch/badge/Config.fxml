@@ -32,8 +32,9 @@
       </image>
     </ImageView>
     <Button fx:id="btSave" defaultButton="true" layoutX="81.0" layoutY="312.0" mnemonicParsing="false" onAction="#salvaConfig" text="Salvar Configuração" />
-    <Button fx:id="bcTeste" layoutX="244.0" layoutY="312.0" mnemonicParsing="false" text="Testar Comexão" />
+    <Button fx:id="bcTeste" layoutX="244.0" layoutY="312.0" mnemonicParsing="false" text="Testar Comexão" onAction="#checaStstus"  />
     <Button fx:id="bxExit" cancelButton="true" layoutX="393.0" layoutY="312.0" mnemonicParsing="false" text="Sair" />
     <PasswordField fx:id="txPass" layoutX="137.0" layoutY="168.0" prefWidth="200.0" />
+    <Label fx:id="lbRemoto" font="$x1" layoutX="30" layoutY="350" text="" />
   </children>
 </AnchorPane>
